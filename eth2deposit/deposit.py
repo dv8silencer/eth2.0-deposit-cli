@@ -26,18 +26,11 @@ languages = get_languages(WORD_LISTS_PATH)
 
 
 def generate_mnemonic(language: str, words_path: str) -> str:
-    mnemonic = get_mnemonic(language=language, words_path=words_path)
-    test_mnemonic = ''
-    while mnemonic != test_mnemonic:
-        click.clear()
-        click.echo('This is your seed phrase. Write it down and store it safely, it is the ONLY way to retrieve your deposit.')  # noqa: E501
-        click.echo('\n\n%s\n\n' % mnemonic)
-        click.pause('Press any key when you have written down your mnemonic.')
-
-        click.clear()
-        test_mnemonic = click.prompt('Please type your mnemonic (separated by spaces) to confirm you have written it down\n\n')  # noqa: E501
-        test_mnemonic = test_mnemonic.lower()
-    click.clear()
+    print("This normally would generate a mnemonic. ")
+    mnemonic = input("INSTEAD, please type your seed with no preceding or lagging spaces and with each word separated by a space.\n").strip().lower()
+    if len(mnemonic.split()) != 24:
+        print("I did not see 24 words")
+        abort()
     return mnemonic
 
 
